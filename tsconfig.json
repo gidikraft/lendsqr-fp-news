@@ -1,0 +1,69 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": [
+        "./app/*"
+      ],
+      "@/api/*": [
+        "app/api/*"
+      ],
+      "@/assets/*": [
+        "./app/assets/*"
+      ],
+      "@/components/*": [
+        "app/components/*"
+      ],
+      "@/constants/*": [
+        "./app/constants/*"
+      ],
+      "@/config/*": [
+        "./app/config/*"
+      ],
+      "@/hooks/*": [
+        "./app/hooks/*"
+      ],
+      "@/i18n/*": [
+        "./app/i18n/*"
+      ],
+      "@/navigator/*": [
+        "app/navigator/*"
+      ],
+      "@/screens/*": [
+        "./app/screens/*"
+      ],
+      "@/services/*": [
+        "./app/services/*"
+      ],
+      "@/store/*": [
+        "./app/store/*"
+      ],
+      "@/types/*": [
+        "./app/types/*"
+      ],
+      "@/theme/*": [
+        "./app/theme/*"
+      ],
+      "@/utils/*": [
+        "./app/utils/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "ES2020",
+  }
+}
