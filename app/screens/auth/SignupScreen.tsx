@@ -3,8 +3,12 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {RootStackScreenProps} from '@/navigator/types';
 import {Box, CustomInput, Pressable, PrimaryButton, Text} from '@/components';
+import {useAppDispatch} from '@/hooks';
+import {setUserDetails} from '@/store/authSlice';
 
 const SignupScreen = ({navigation}: RootStackScreenProps<'SignupScreen'>) => {
+  const dispatch = useAppDispatch();
+
   const goToLogin = () => {
     navigation.navigate('LoginScreen');
   };
@@ -15,7 +19,8 @@ const SignupScreen = ({navigation}: RootStackScreenProps<'SignupScreen'>) => {
     lastname: string;
     phonenumber: string;
   }) => {
-    navigation.navigate('CreateAccountScreen', {userdetails: data});
+    dispatch(setUserDetails(data));
+    navigation.navigate('CreateAccountScreen');
   };
 
   const {

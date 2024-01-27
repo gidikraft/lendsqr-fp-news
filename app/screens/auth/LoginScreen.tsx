@@ -3,17 +3,21 @@ import {RootStackScreenProps} from '@/navigator/types';
 import {Box, CustomInput, Pressable, PrimaryButton, Text} from '@/components';
 import {useForm} from 'react-hook-form';
 import {StyleSheet} from 'react-native';
+import {useAppDispatch} from '@/hooks';
+import {login} from '@/store/authSlice';
 
 const LoginScreen = ({navigation}: RootStackScreenProps<'LoginScreen'>) => {
+  const dispatch = useAppDispatch();
+
   const toSignUp = () => navigation.navigate('SignupScreen');
 
   const goToResetPassword = () => {
     navigation.navigate('ForgotPasswordScreen');
   };
 
-  const login = (data: {email: string; password: string}) => {
+  const loginUser = (data: {email: string; password: string}) => {
     console.log(data, 'data');
-    navigation.navigate('BottomTabs');
+    dispatch(login());
   };
 
   const onGoogleButtonPress = async () => {
@@ -107,7 +111,7 @@ const LoginScreen = ({navigation}: RootStackScreenProps<'LoginScreen'>) => {
 
         <PrimaryButton
           label="Login"
-          onPress={handleSubmit(login)}
+          onPress={handleSubmit(loginUser)}
           backgroundColor="contactColor"
           labelProps={{color: 'white'}}
           variant="textColor"

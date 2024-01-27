@@ -4,8 +4,6 @@ import {
 } from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {UserDetails} from '@/types';
-// import { TEvent } from "@/types/";
 
 declare global {
   namespace ReactNavigation {
@@ -18,8 +16,8 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   SignupScreen: undefined;
   ForgotPasswordScreen: undefined;
-  CreateAccountScreen: {userdetails: UserDetails};
-  ProfileScreen: undefined;
+  CreateAccountScreen: undefined;
+  NewsDetails: undefined;
 
   VerifyOtp: undefined;
 };

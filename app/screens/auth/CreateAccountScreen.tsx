@@ -9,12 +9,14 @@ import {
 } from '@/components';
 import {RootStackScreenProps} from '@/navigator/types';
 import {useForm} from 'react-hook-form';
+import {useAppDispatch, useAppSelector} from '@/hooks';
+import {login} from '@/store/authSlice';
 
 const CreateAccountScreen = ({
   navigation,
-  route,
 }: RootStackScreenProps<'CreateAccountScreen'>) => {
-  const {userdetails} = route.params;
+  const {userData} = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
   const [isloading, setIsloading] = useState(false);
 
   const {
@@ -33,7 +35,8 @@ const CreateAccountScreen = ({
   const createAccount = (data: {email: string; password: string}) => {
     setIsloading(true);
     setTimeout(() => {
-      console.log(data, userdetails, 'ddata');
+      console.log(data, userData, 'ddata');
+      dispatch(login());
       setIsloading(false);
     }, 1500);
   };
