@@ -8,10 +8,18 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
+    "gradle-clean": "cd android && ./gradlew clean && cd ..",
     "pod-install": "cd ios && pod install && cd .."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.21.0",
+    "@react-native-firebase/analytics": "^18.8.0",
+    "@react-native-firebase/app": "^18.8.0",
+    "@react-native-firebase/auth": "^18.8.0",
+    "@react-native-firebase/crashlytics": "^18.8.0",
+    "@react-native-firebase/perf": "^18.8.0",
+    "@react-native-firebase/remote-config": "^18.8.0",
+    "@react-native-google-signin/google-signin": "^11.0.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",

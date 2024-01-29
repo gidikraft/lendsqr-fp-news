@@ -1,7 +1,6 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from './Store';
-import {UserDetails} from '@/types';
-// import { FUser, TUser } from '@/types/auth';
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from './Store';
+import { UserDetails } from '@/types';
 
 interface initialAppState {
   isAuthenticated: boolean;
@@ -30,13 +29,13 @@ export const authSlice = createSlice({
     logout: state => {
       state.isAuthenticated = false;
     },
-    setUserDetails: (state, {payload}) => {
+    setUserDetails: (state, { payload }) => {
       state.userData = payload;
     },
   },
 });
 
-export const {login, logout, setUserDetails} = authSlice.actions;
+export const { login, logout, setUserDetails } = authSlice.actions;
 
 export const authSelector = (state: RootState) => state.auth.isAuthenticated;
 

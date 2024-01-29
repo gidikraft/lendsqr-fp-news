@@ -1,49 +1,68 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Box, Icon, Pressable, PrimaryButton, Text } from '@/components';
+import { RootStackScreenProps } from '@/navigator/types';
+import { useAppSelector } from '@/hooks';
+import { screenTrace } from '@/utils/screentrace';
 import {
-  Box,
-  CustomInput,
-  Icon,
-  Pressable,
-  PrimaryButton,
-  Text,
-} from '@/components';
-import {RootStackScreenProps} from '@/navigator/types';
-import {useForm} from 'react-hook-form';
-import {useAppDispatch, useAppSelector} from '@/hooks';
-import {login} from '@/store/authSlice';
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import analytics from '@react-native-firebase/analytics';
+import auth from '@react-native-firebase/auth';
+import { Alert } from 'react-native';
+
+GoogleSignin.configure({
+  webClientId:
+    '466884891109-2hahf5pl97vf7elq283p9cttgntj8a6q.apps.googleusercontent.com',
+});
 
 const CreateAccountScreen = ({
   navigation,
 }: RootStackScreenProps<'CreateAccountScreen'>) => {
-  const {userData} = useAppSelector(state => state.auth);
-  const dispatch = useAppDispatch();
+  const { userData } = useAppSelector(state => state.auth);
   const [isloading, setIsloading] = useState(false);
 
-  const {
-    control,
-    formState: {errors},
-    // getValues,
-    handleSubmit,
-    // setError,
-  } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
+  useEffect(() => {
+    screenTrace('CreateAccountScreen');
+  }, []);
 
-  const createAccount = (data: {email: string; password: string}) => {
-    setIsloading(true);
-    setTimeout(() => {
-      console.log(data, userData, 'ddata');
-      dispatch(login());
+  const onGoogleButtonPress = async () => {
+    try {
+      setIsloading(true);
+
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
+      const { idToken, user } = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      await analytics().logEvent('signup', {
+        id: user?.id,
+        email: user?.email,
+        fistName: userData.firstname,
+        lastName: userData.lastname,
+        phoneNumber: userData.phonenumber,
+      });
+
+      return auth().signInWithCredential(googleCredential);
+    } catch (error: any) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log('user cancelled the login flow');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log('operation (e.g. sign in) is in progress already');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Alert.alert('Play services not available or outdated');
+      } else {
+        console.log(error, 'google signin error');
+      }
+    } finally {
       setIsloading(false);
-    }, 1500);
+    }
   };
 
-  const goToLogin = () => {
-    navigation.navigate('LoginScreen');
-  };
+  // const goToLogin = () => {
+  //   navigation.navigate('LoginScreen');
+  // };
 
   return (
     <Box flex={1} paddingHorizontal="md" backgroundColor="background">
@@ -61,72 +80,17 @@ const CreateAccountScreen = ({
           Create your account
         </Text>
 
-        <Box marginTop="lg">
-          <CustomInput
-            placeholder="Enter new email"
-            control={control}
-            name="email"
-            label="Email"
-            rules={{
-              required: 'Email is required',
-              maxLength: {
-                value: 100,
-                message: 'Maximum of 100 characters',
-              },
-              pattern: {
-                value: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: 'Please enter a valid email',
-              },
-            }}
-            keyboardType="email-address"
-            errorMessage={errors.email?.message}
-          />
-        </Box>
-
-        <Box marginTop="lg">
-          <CustomInput
-            placeholder="Enter your password"
-            control={control}
-            name="password"
-            label="Password"
-            rules={{
-              required: 'Password is required',
-              maxLength: {
-                value: 32,
-                message: 'Maximum of 32 characters',
-              },
-              minLength: {
-                value: 6,
-                message: 'Password must be 6 or more alphanumeric',
-              },
-              pattern: {
-                value: /^[a-zA-Z0-9]*$/,
-                message: 'Please enter a valid password',
-              },
-            }}
-            secureTextEntry
-            errorMessage={errors.password?.message}
-          />
-        </Box>
-
         <PrimaryButton
-          label="Create Account"
-          onPress={handleSubmit(createAccount)}
-          backgroundColor="contactColor"
-          labelProps={{color: 'white'}}
-          variant="white"
-          marginTop="xl"
+          label="Sign in with Google"
+          onPress={onGoogleButtonPress}
+          backgroundColor="white"
+          variant="textColor"
+          borderWidth={1}
+          borderColor="border"
+          marginTop="xxl"
+          icon="google"
           isloading={isloading}
         />
-
-        <Box flexDirection="row" justifyContent="center" marginTop="md">
-          <Text>Already have an account?</Text>
-          <Pressable type="scale" onPress={goToLogin}>
-            <Text marginLeft="xs" color="textBlue">
-              Login instead
-            </Text>
-          </Pressable>
-        </Box>
       </Box>
     </Box>
   );

@@ -2,8 +2,8 @@ import {
   CompositeScreenProps,
   NavigatorScreenParams,
 } from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 declare global {
   namespace ReactNavigation {
@@ -15,9 +15,8 @@ export type RootStackParamList = {
   BottomTabs: NavigatorScreenParams<RootTabParamList> | undefined;
   LoginScreen: undefined;
   SignupScreen: undefined;
-  ForgotPasswordScreen: undefined;
   CreateAccountScreen: undefined;
-  NewsDetails: undefined;
+  // NewsDetails: { article: NewsItem } | undefined;
 
   VerifyOtp: undefined;
 };
@@ -27,7 +26,6 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   NewsListingsScreen: undefined;
-  EventsScreen: undefined;
   ProfileScreen: undefined;
 };
 

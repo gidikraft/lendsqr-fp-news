@@ -2,5 +2,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["typescript"]
+  "eslint.validate": [
+    "typescript"
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

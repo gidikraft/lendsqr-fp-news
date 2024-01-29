@@ -1,13 +1,13 @@
-import {FlatList, RefreshControl, StyleSheet} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {Box, Icon, Pressable, Text} from '@/components';
-// import { RootStackScreenProps } from '@/navigation/types';
-import {NotificationDetails} from '../../components/Modals';
-// import IIcon from 'react-native-vector-icons/Ionicons';
-import {SERVER} from '@/services/network';
-import {palette} from '@/theme';
-import {formatEllipseText} from '@/utils/text';
-import {NewsItem} from '@/types';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Box, Icon, Pressable, Text } from '@/components';
+import { NotificationDetails } from '../../components/Modals';
+import { SERVER } from '@/services/network';
+import { palette } from '@/theme';
+import { formatEllipseText } from '@/utils/text';
+import { NewsItem } from '@/types';
+import perf from '@react-native-firebase/perf';
+import { screenTrace } from '@/utils/screentrace';
 
 const NewsListingsScreen = () => {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
@@ -17,17 +17,30 @@ const NewsListingsScreen = () => {
 
   const toggleDetails = () => setShowDetails(prev => !prev);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
+      getNew();
       setRefreshing(false);
-    }, 2000);
+    }, 500);
   }, []);
 
   const getNew = async () => {
     try {
+      const metric = await perf().newHttpMetric('posts', 'GET');
+
+      // add any extra metric attributes if needed
+      metric.putAttribute('user', 'abcd');
+
+      await metric.start();
+
       const newsresponse = await SERVER.get('posts');
       // console.log(newsresponse.data, 'newsresponse');
+      metric.setHttpResponseCode(newsresponse.status);
+      // metric.setResponseContentType(newsresponse.headers.get('Content-Type'));
+      // metric.setResponsePayloadSize(newsresponse.headers.get('Content-Length'));
+
+      await metric.stop();
       setNewsList(newsresponse.data);
     } catch (error) {
       console.log(error, 'news error response');
@@ -36,7 +49,15 @@ const NewsListingsScreen = () => {
 
   useEffect(() => {
     getNew();
+    screenTrace('NewsDetailsScreen');
   }, []);
+
+  const openArticle = (item: NewsItem) => {
+    // navigation.navigate('NewsDetails', { article: item });
+    toggleDetails();
+    setActiveIndex(item);
+    console.log(item, 'item');
+  };
 
   return (
     <Box flex={1} backgroundColor="background" paddingHorizontal="sm">
@@ -54,17 +75,14 @@ const NewsListingsScreen = () => {
           data={newsList}
           keyExtractor={item => item.id.toString()}
           contentContainerStyle={styles.newsItemContainer}
-          renderItem={({item}) => {
-            const {title, body} = item;
+          renderItem={({ item }) => {
+            const { title, body, userId } = item;
             return (
               <NewsFile
                 body={body}
                 title={title}
-                itemPress={() => {
-                  toggleDetails();
-                  setActiveIndex(item);
-                  console.log(item, 'item');
-                }}
+                itemPress={() => openArticle(item)}
+                userId={userId}
               />
             );
           }}
@@ -79,14 +97,14 @@ const NewsListingsScreen = () => {
             />
           }
           showsVerticalScrollIndicator={false}
-          // refreshControl={ }
         />
       </Box>
       <NotificationDetails
+        author={`${activeIndex?.userId}`}
+        body={activeIndex?.body}
         closeModal={toggleDetails}
         showModal={showDetails}
         title={activeIndex?.title}
-        body={activeIndex?.body}
       />
     </Box>
   );
@@ -96,11 +114,12 @@ export default NewsListingsScreen;
 
 type NotificationItemProp = {
   body: string;
-  title: string;
   itemPress: () => void;
+  title: string;
+  userId: number;
 };
 
-const NewsFile = ({body, title, itemPress}: NotificationItemProp) => {
+const NewsFile = ({ body, title, itemPress, userId }: NotificationItemProp) => {
   return (
     <Pressable
       paddingVertical="ssm"
@@ -113,17 +132,15 @@ const NewsFile = ({body, title, itemPress}: NotificationItemProp) => {
       alignItems="center"
       style={styles.newsItem}
       onPress={itemPress}>
-      {/* <IIcon
-          name="chatbox-ellipses-outline"
-          size={30}
-          color={palette.black}
-        /> */}
       <Icon name="profile-photo" />
-      <Box marginLeft="ssm">
+      <Box marginLeft="ssm" width={'90%'}>
         <Text variant="medium14">{title}</Text>
         <Text variant="regular12" marginTop="xs">
           {formatEllipseText(body, 100)}
         </Text>
+        <Text
+          textAlign="right"
+          variant="regular12">{`Written by: ${userId}`}</Text>
       </Box>
     </Pressable>
   );

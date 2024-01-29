@@ -1,13 +1,18 @@
 // import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {useForm} from 'react-hook-form';
-import {RootStackScreenProps} from '@/navigator/types';
-import {Box, CustomInput, Pressable, PrimaryButton, Text} from '@/components';
-import {useAppDispatch} from '@/hooks';
-import {setUserDetails} from '@/store/authSlice';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { RootStackScreenProps } from '@/navigator/types';
+import { Box, CustomInput, Pressable, PrimaryButton, Text } from '@/components';
+import { useAppDispatch } from '@/hooks';
+import { setUserDetails } from '@/store/authSlice';
+import { screenTrace } from '@/utils/screentrace';
 
-const SignupScreen = ({navigation}: RootStackScreenProps<'SignupScreen'>) => {
+const SignupScreen = ({ navigation }: RootStackScreenProps<'SignupScreen'>) => {
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    screenTrace('SignupScreen');
+  }, []);
 
   const goToLogin = () => {
     navigation.navigate('LoginScreen');
@@ -25,12 +30,8 @@ const SignupScreen = ({navigation}: RootStackScreenProps<'SignupScreen'>) => {
 
   const {
     control,
-    formState: {errors},
-    // getFieldState,
-    // getValues,
+    formState: { errors },
     handleSubmit,
-    // setError,
-    // setValue,
   } = useForm({
     defaultValues: {
       email: '',
@@ -148,10 +149,9 @@ const SignupScreen = ({navigation}: RootStackScreenProps<'SignupScreen'>) => {
         label="Continue"
         onPress={handleSubmit(firbaseSignup)}
         backgroundColor="contactColor"
-        labelProps={{color: 'white'}}
+        labelProps={{ color: 'white' }}
         variant="textColor"
         marginTop="xl"
-        // isloading={isLoading}
       />
 
       <Box flexDirection="row" justifyContent="center" marginTop="md">

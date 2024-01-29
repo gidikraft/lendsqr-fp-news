@@ -1,20 +1,30 @@
-import {ScrollView, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
-import {Box, Icon, IconName, Pressable, Text} from '@/components';
-import {LogoutModal} from '../../components/Modals/';
+import { ScrollView, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Box, Icon, IconName, Pressable, Text } from '@/components';
+import { LogoutModal } from '../../components/Modals/';
 // import {RootTabScreenProps} from '@/navigation/types';
-import {useAppDispatch} from '@/hooks';
-import {logout} from '@/store/authSlice';
+// import { useAppDispatch } from '@/hooks';
+// import { logout } from '@/store/authSlice';
+import { screenTrace } from '@/utils/screentrace';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const ProfileScreen = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    screenTrace('ProfileScreen');
+  }, []);
+
+  const firebaseAuth = auth();
 
   const toggleLogoutModal = () => setShowLogoutModal(prev => !prev);
 
   const loginOutUser = async () => {
-    dispatch(logout());
+    await GoogleSignin.signOut().then(() => {
+      firebaseAuth.signOut();
+      console.log('User signed out!');
+    });
   };
 
   const doSomething = () => console.log('do something');

@@ -6,17 +6,19 @@ import Icon from '../Icons';
 // import IIcon from 'react-native-vector-icons/Ionicons';
 
 type ModalProps = {
-  showModal: boolean;
-  closeModal: () => void;
-  title?: string;
+  author: string;
   body?: string;
+  closeModal: () => void;
+  showModal: boolean;
+  title?: string;
 };
 
 const NotificationDetails = ({
+  author,
+  body,
   closeModal,
   showModal,
   title,
-  body,
 }: ModalProps) => {
   return (
     <Bottomsheet
@@ -31,7 +33,7 @@ const NotificationDetails = ({
         paddingTop="md"
         paddingBottom="xxl">
         <Text variant="medium18" marginTop="md" color="primary">
-          Engard
+          Lendsqr News
         </Text>
         <Text color="textColor" variant="medium16" marginTop="sm">
           {title}
@@ -39,6 +41,13 @@ const NotificationDetails = ({
 
         <Text marginTop="lg" color="textColor">
           {body}
+        </Text>
+        <Text
+          marginTop="md"
+          color="textColor"
+          marginBottom="md"
+          textAlign="right">
+          Written by: {author}
         </Text>
         <Icon name="incoming" />
         {/* <IIcon name="bulb-outline" size={30} color={palette.black} style={{ alignSelf: 'flex-end', marginTop: 16}}/> */}

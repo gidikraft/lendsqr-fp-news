@@ -1,10 +1,6 @@
-import {getFromLS} from '@/utils/storage';
-
+import { getFromLS } from '@/utils/storage';
 import axios from 'axios';
 
-// const today = new Date();
-// const API_KEY = '9f80026d02654659b63626deb0dfb4bc';
-// const url = `https://newsapi.org/v2/everything?q=nigeria&from=${today}&sortBy=publishedAt&apiKey=${API_KEY}&pageSize=10&page=1`;
 const url = 'https://jsonplaceholder.typicode.com/';
 
 export const SERVER = axios.create({
@@ -13,16 +9,54 @@ export const SERVER = axios.create({
 
 SERVER.interceptors.request.use(
   async config => {
-    const token = await getFromLS('__token__');
+    try {
+      const token = await getFromLS('__token__');
 
-    if (token) {
-      config.headers.authorization = `Bearer ${token}`;
+      if (token) {
+        config.headers.authorization = `Bearer ${token}`;
+      }
+      // const httpMetric = perf().newHttpMetric(
+      //   config.url as string,
+      //   config.method,
+      // );
+      // config.metadata = { httpMetric };
+
+      // await httpMetric.start();
+    } finally {
+      return config;
     }
 
-    return config;
+    // return config;
   },
   error => {
     console.log(`axios helper error: ${error}`);
     return Promise.reject(error);
   },
 );
+
+// SERVER.interceptors.response.use(
+//   async function (response) {
+//     try {
+//       const { httpMetric } = response.config.metadata;
+
+//       httpMetric.setHttpResponseCode(response.status);
+//       httpMetric.setResponseContentType(response.headers['content-type']);
+//       await httpMetric.stop();
+//     } finally {
+//       return response;
+//     }
+//   },
+//   async function (error) {
+//     try {
+//       const { httpMetric } = error.config.metadata;
+
+//       httpMetric.setHttpResponseCode(error.response.status);
+//       httpMetric.setResponseContentType(error.response.headers['content-type']);
+//       await httpMetric.stop();
+//     } finally {
+//       // Ensure failed requests throw after interception
+//       console.log(error, 'news error');
+//       return Promise.reject(error);
+//     }
+//   },
+// );
