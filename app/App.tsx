@@ -12,6 +12,7 @@ import {
   NoficationListener,
 } from '@/services/notification';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import CodePush from 'react-native-code-push';
 
 const App = () => {
   const fetchRemoteConfigData = async () => {
@@ -21,14 +22,14 @@ const App = () => {
       });
       await remoteConfig().fetch(300);
       await remoteConfig().activate();
-      // const config = remoteConfig().getAll();
+      const config = remoteConfig().getAll();
 
-      // Object.entries(config).forEach($ => {
-      //   const [key, entry] = $;
-      //   console.log('Key: ', key);
-      //   console.log('Source: ', entry.getSource());
-      //   console.log('Value: ', entry.asString());
-      // });
+      Object.entries(config).forEach($ => {
+        const [key, entry] = $;
+        console.log('Key: ', key);
+        console.log('Source: ', entry.getSource());
+        console.log('Value: ', entry.asString());
+      });
     } catch (error) {
       console.log(error, 'remote-config error');
     }
@@ -57,4 +58,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CodePush(App);
