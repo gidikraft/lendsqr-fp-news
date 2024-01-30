@@ -9,6 +9,8 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import LOGO from '@/assets/images/lendsqr_logo.png';
+import { Image, StyleSheet } from 'react-native';
 
 GoogleSignin.configure({
   webClientId:
@@ -66,34 +68,41 @@ const LoginScreen = ({ navigation }: RootStackScreenProps<'LoginScreen'>) => {
 
   return (
     <Box flex={1} backgroundColor="background" paddingHorizontal="md">
-      <Box flex={1} justifyContent="center">
-        <Text variant="bold24" color="blackTint" marginVertical="sm">
-          Welcome back
-        </Text>
+      <Image source={LOGO} style={styles.logo} />
+      <Text variant="bold24" color="blackTint" marginVertical="sm">
+        Welcome back
+      </Text>
 
-        <PrimaryButton
-          label="Sign in with Google"
-          onPress={onGoogleButtonPress}
-          backgroundColor="white"
-          variant="textColor"
-          borderWidth={1}
-          borderColor="border"
-          marginTop="md"
-          icon="google"
-          isloading={isloading}
-        />
+      <PrimaryButton
+        label="Sign in with Google"
+        onPress={onGoogleButtonPress}
+        backgroundColor="white"
+        variant="textColor"
+        borderWidth={1}
+        borderColor="border"
+        marginTop="xxxl"
+        icon="google"
+        isloading={isloading}
+      />
 
-        <Box flexDirection="row" justifyContent="center" marginTop="sl">
-          <Text>Don't have an account?</Text>
-          <Pressable type="scale" onPress={toSignUp}>
-            <Text marginLeft="xs" color="textBlue">
-              Sign up
-            </Text>
-          </Pressable>
-        </Box>
+      <Box flexDirection="row" justifyContent="center" marginTop="sl">
+        <Text>Don't have an account?</Text>
+        <Pressable type="scale" onPress={toSignUp}>
+          <Text marginLeft="xs" color="textBlue">
+            Sign up
+          </Text>
+        </Pressable>
       </Box>
     </Box>
   );
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  logo: {
+    height: 50,
+    width: 230,
+    marginTop: 100,
+  },
+});

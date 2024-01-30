@@ -6,6 +6,8 @@ import { Box, CustomInput, Pressable, PrimaryButton, Text } from '@/components';
 import { useAppDispatch } from '@/hooks';
 import { setUserDetails } from '@/store/authSlice';
 import { screenTrace } from '@/utils/screentrace';
+import LOGO from '@/assets/images/lendsqr_logo.png';
+import { Image, StyleSheet } from 'react-native';
 
 const SignupScreen = ({ navigation }: RootStackScreenProps<'SignupScreen'>) => {
   const dispatch = useAppDispatch();
@@ -42,12 +44,9 @@ const SignupScreen = ({ navigation }: RootStackScreenProps<'SignupScreen'>) => {
   });
 
   return (
-    <Box
-      paddingHorizontal="md"
-      justifyContent="center"
-      flex={1}
-      backgroundColor="background">
-      <Text variant="bold24" color="blackTint">
+    <Box paddingHorizontal="md" flex={1} backgroundColor="background">
+      <Image source={LOGO} style={styles.logo} />
+      <Text variant="bold24" color="blackTint" marginTop="lg">
         Create an account
       </Text>
 
@@ -168,4 +167,10 @@ const SignupScreen = ({ navigation }: RootStackScreenProps<'SignupScreen'>) => {
 
 export default SignupScreen;
 
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  logo: {
+    height: 50,
+    width: 230,
+    marginTop: 100,
+  },
+});

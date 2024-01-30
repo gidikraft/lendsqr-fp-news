@@ -9,7 +9,8 @@ import {
 } from '@react-native-google-signin/google-signin';
 import analytics from '@react-native-firebase/analytics';
 import auth from '@react-native-firebase/auth';
-import { Alert } from 'react-native';
+import { Alert, Image, StyleSheet } from 'react-native';
+import LOGO from '@/assets/images/lendsqr_logo.png';
 
 GoogleSignin.configure({
   webClientId:
@@ -60,9 +61,9 @@ const CreateAccountScreen = ({
     }
   };
 
-  // const goToLogin = () => {
-  //   navigation.navigate('LoginScreen');
-  // };
+  const goToLogin = () => {
+    navigation.navigate('LoginScreen');
+  };
 
   return (
     <Box flex={1} paddingHorizontal="md" backgroundColor="background">
@@ -74,26 +75,42 @@ const CreateAccountScreen = ({
           Create Account
         </Text>
       </Box>
+      <Image source={LOGO} style={styles.logo} />
 
-      <Box flex={1} justifyContent="center">
-        <Text variant="bold24" color="blackTint">
-          Create your account
-        </Text>
+      <Text variant="bold24" color="blackTint" marginTop="md">
+        Create your account
+      </Text>
 
-        <PrimaryButton
-          label="Sign in with Google"
-          onPress={onGoogleButtonPress}
-          backgroundColor="white"
-          variant="textColor"
-          borderWidth={1}
-          borderColor="border"
-          marginTop="xxl"
-          icon="google"
-          isloading={isloading}
-        />
+      <PrimaryButton
+        label="Sign in with Google"
+        onPress={onGoogleButtonPress}
+        backgroundColor="white"
+        variant="textColor"
+        borderWidth={1}
+        borderColor="border"
+        marginTop="xxl"
+        icon="google"
+        isloading={isloading}
+      />
+
+      <Box flexDirection="row" justifyContent="center" marginTop="md">
+        <Text>Already have an account?</Text>
+        <Pressable type="scale" onPress={goToLogin}>
+          <Text marginLeft="xs" color="textBlue">
+            Login instead
+          </Text>
+        </Pressable>
       </Box>
     </Box>
   );
 };
 
 export default CreateAccountScreen;
+
+const styles = StyleSheet.create({
+  logo: {
+    height: 50,
+    width: 230,
+    marginTop: 100,
+  },
+});
