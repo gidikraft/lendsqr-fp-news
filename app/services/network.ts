@@ -1,5 +1,6 @@
 import { getFromLS } from '@/utils/storage';
 import axios from 'axios';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const url = 'https://jsonplaceholder.typicode.com/';
 
@@ -29,6 +30,7 @@ SERVER.interceptors.request.use(
     // return config;
   },
   error => {
+    crashlytics().recordError(error);
     console.log(`axios helper error: ${error}`);
     return Promise.reject(error);
   },

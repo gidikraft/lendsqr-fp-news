@@ -69,6 +69,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = lendsqrfpnews/main.m; sourceTree = "<group>"; };
 		16226E92D9E849008BC54C76 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../app/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		164142C12B67A9B200CAA6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16F794632B681DD100084831 /* lendsqrfpnews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = lendsqrfpnews.entitlements; path = lendsqrfpnews/lendsqrfpnews.entitlements; sourceTree = "<group>"; };
 		1F5C2105B7EE446BB544B58A /* BlackMango-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BlackMango-Bold.ttf"; path = "../app/assets/fonts/BlackMango-Bold.ttf"; sourceTree = "<group>"; };
 		21373600A38C40CDAF3AE32B /* BlackMango-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BlackMango-Light.ttf"; path = "../app/assets/fonts/BlackMango-Light.ttf"; sourceTree = "<group>"; };
 		317D737CCFA24275A734C6AA /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../app/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		13B07FAE1A68108700A75B9A /* lendsqrfpnews */ = {
 			isa = PBXGroup;
 			children = (
+				16F794632B681DD100084831 /* lendsqrfpnews.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -636,6 +638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = lendsqrfpnews/lendsqrfpnews.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = lendsqrfpnews/Info.plist;
@@ -663,6 +666,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = lendsqrfpnews/lendsqrfpnews.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = lendsqrfpnews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -1,6 +1,6 @@
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Icon, Pressable, Text } from '@/components';
+import { Box, Icon, Pressable, PrimaryButton, Text } from '@/components';
 import { NotificationDetails } from '../../components/Modals';
 import { SERVER } from '@/services/network';
 import { palette } from '@/theme';
@@ -8,6 +8,7 @@ import { formatEllipseText } from '@/utils/text';
 import { NewsItem } from '@/types';
 import perf from '@react-native-firebase/perf';
 import { screenTrace } from '@/utils/screentrace';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const NewsListingsScreen = () => {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
@@ -42,7 +43,8 @@ const NewsListingsScreen = () => {
 
       await metric.stop();
       setNewsList(newsresponse.data);
-    } catch (error) {
+    } catch (error: any) {
+      crashlytics().recordError(error);
       console.log(error, 'news error response');
     }
   };
@@ -59,6 +61,11 @@ const NewsListingsScreen = () => {
     console.log(item, 'item');
   };
 
+  const throwSomeError = () => {
+    throw new Error('Throw crashlytics error');
+    // undefinedVariable.notAFunction();
+  };
+
   return (
     <Box flex={1} backgroundColor="background" paddingHorizontal="sm">
       {/* <Box flexDirection="row" alignItems="center" marginTop="md">
@@ -69,6 +76,18 @@ const NewsListingsScreen = () => {
           Notification
         </Text>
       </Box> */}
+
+      <PrimaryButton
+        label="Throw error"
+        onPress={throwSomeError}
+        backgroundColor="white"
+        variant="textColor"
+        borderWidth={1}
+        borderColor="border"
+        marginTop="md"
+        width={'40%'}
+        alignSelf="flex-end"
+      />
 
       <Box marginTop="lg">
         <FlatList

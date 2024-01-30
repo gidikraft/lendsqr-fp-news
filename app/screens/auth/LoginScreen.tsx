@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RootStackScreenProps } from '@/navigator/types';
 import { Box, Pressable, PrimaryButton, Text } from '@/components';
 import analytics from '@react-native-firebase/analytics';
-// import crashlytics from '@react-native-firebase/crashlytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 import { screenTrace } from '@/utils/screentrace';
 import {
   GoogleSignin,
@@ -38,16 +38,25 @@ const LoginScreen = ({ navigation }: RootStackScreenProps<'LoginScreen'>) => {
         lastName: user?.familyName,
         email: user?.email,
       });
+      crashlytics().log('User signed in.');
+      await Promise.all([
+        crashlytics().setUserId(user?.id),
+        crashlytics().setAttributes({
+          role: 'admin',
+          email: user.email,
+        }),
+      ]);
+
       return auth().signInWithCredential(googleCredential);
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
+        crashlytics().recordError(error?.message);
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
+        crashlytics().recordError(error?.message);
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
+        crashlytics().recordError(error?.message);
       } else {
-        // some other error happened
+        crashlytics().recordError(error?.message);
         console.log(error, 'google signin error');
       }
     } finally {

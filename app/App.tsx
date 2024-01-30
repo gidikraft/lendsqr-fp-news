@@ -7,6 +7,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import crashlytics from '@react-native-firebase/crashlytics';
 import remoteConfig from '@react-native-firebase/remote-config';
+import {
+  requestUserPermission,
+  NoficationListener,
+} from '@/services/notification';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const App = () => {
   const fetchRemoteConfigData = async () => {
@@ -16,7 +21,7 @@ const App = () => {
       });
       await remoteConfig().fetch(300);
       await remoteConfig().activate();
-      const config = remoteConfig().getAll();
+      // const config = remoteConfig().getAll();
 
       // Object.entries(config).forEach($ => {
       //   const [key, entry] = $;
@@ -34,14 +39,21 @@ const App = () => {
     fetchRemoteConfigData();
   }, []);
 
+  useEffect(() => {
+    requestUserPermission();
+    NoficationListener();
+  }, []);
+
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <SafeAreaProvider>
-          <RootNavigation />
-        </SafeAreaProvider>
-      </ThemeProvider>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <SafeAreaProvider>
+            <RootNavigation />
+          </SafeAreaProvider>
+        </ThemeProvider>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
