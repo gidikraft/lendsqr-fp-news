@@ -70,11 +70,11 @@ const RootNavigation = () => {
               component={BottomTabNavigator}
               options={{ headerShown: false }}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
               name="NewsDetails"
               component={NewsDetailsScreen}
               options={{ headerShown: false }}
-            /> */}
+            />
           </Stack.Group>
         ) : (
           <Stack.Group>

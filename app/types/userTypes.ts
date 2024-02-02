@@ -26,3 +26,11 @@ type SourceType = {
   id: string | null;
   name: string;
 };
+
+export type NewComments = {
+  body: string;
+  email: string;
+  id: number;
+  name: string;
+  postId: number;
+};
