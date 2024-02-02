@@ -15,8 +15,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		164142C22B67A9B200CAA6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 164142C12B67A9B200CAA6D8 /* GoogleService-Info.plist */; };
-		164142C32B67A9B200CAA6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 164142C12B67A9B200CAA6D8 /* GoogleService-Info.plist */; };
+		16807B272B6CB6DC004E0E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16807B262B6CB6DC004E0E71 /* GoogleService-Info.plist */; };
+		16807B282B6CB6DC004E0E71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16807B262B6CB6DC004E0E71 /* GoogleService-Info.plist */; };
 		184C6FBFFA894BDFB73E91F5 /* BlackMango-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E1E7C73A040472EBE6C1194 /* BlackMango-Regular.ttf */; };
 		1D720454CCD446868F7DBBEE /* BlackMango-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BFF06DCC10B4F6EBE34340A /* BlackMango-ExtraLight.ttf */; };
 		24A07C807A1F3FC7BEB1FCAA /* Pods_lendsqrfpnews_lendsqrfpnewsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC1B6911F48BB91D3122C3E /* Pods_lendsqrfpnews_lendsqrfpnewsTests.framework */; };
@@ -68,7 +68,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = lendsqrfpnews/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = lendsqrfpnews/main.m; sourceTree = "<group>"; };
 		16226E92D9E849008BC54C76 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../app/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
-		164142C12B67A9B200CAA6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16807B262B6CB6DC004E0E71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16F794632B681DD100084831 /* lendsqrfpnews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = lendsqrfpnews.entitlements; path = lendsqrfpnews/lendsqrfpnews.entitlements; sourceTree = "<group>"; };
 		1F5C2105B7EE446BB544B58A /* BlackMango-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BlackMango-Bold.ttf"; path = "../app/assets/fonts/BlackMango-Bold.ttf"; sourceTree = "<group>"; };
 		21373600A38C40CDAF3AE32B /* BlackMango-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BlackMango-Light.ttf"; path = "../app/assets/fonts/BlackMango-Light.ttf"; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				164142C12B67A9B200CAA6D8 /* GoogleService-Info.plist */,
+				16807B262B6CB6DC004E0E71 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* lendsqrfpnews */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* lendsqrfpnewsTests */,
@@ -297,7 +297,8 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -332,7 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				164142C32B67A9B200CAA6D8 /* GoogleService-Info.plist in Resources */,
+				16807B282B6CB6DC004E0E71 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +358,7 @@
 				7B188A1FCBA048BDAFACF3A1 /* Poppins-BoldItalic.ttf in Resources */,
 				2D394AF1FBF34721A9A6D949 /* Poppins-ExtraBold.ttf in Resources */,
 				CFE003B1345948BEBD52290B /* Poppins-ExtraBoldItalic.ttf in Resources */,
-				164142C22B67A9B200CAA6D8 /* GoogleService-Info.plist in Resources */,
+				16807B272B6CB6DC004E0E71 /* GoogleService-Info.plist in Resources */,
 				719544FEFF5B4287B585C734 /* Poppins-ExtraLight.ttf in Resources */,
 				E9E1F904883945E0867627D0 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				D643C09480FF45499E46E6D1 /* Poppins-Italic.ttf in Resources */,
@@ -585,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-lendsqrfpnews-lendsqrfpnewsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -612,6 +614,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-lendsqrfpnews-lendsqrfpnewsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = lendsqrfpnewsTests/Info.plist;
@@ -719,6 +722,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -800,6 +804,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
