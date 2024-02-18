@@ -12,6 +12,7 @@ const initialUserData = {
   firstname: '',
   lastname: '',
   phonenumber: '',
+  accessToken: null,
 };
 
 const initialState: initialAppState = {

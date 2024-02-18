@@ -58,7 +58,13 @@ const ProfileScreen = () => {
                 variant="regular12"
                 color="white"
                 textTransform="capitalize">
-                {'Ade tutu'}
+                {'Seun Fagade'}
+              </Text>
+              <Text
+                variant="regular12"
+                color="white"
+                textTransform="capitalize">
+                {'Developer'}
               </Text>
             </Box>
           </Box>
@@ -74,18 +80,18 @@ const ProfileScreen = () => {
           padding="md"
           style={styles.container}>
           <ProfileItem
-            title="My Account "
-            description="Make changes to your account"
+            title="Option 1"
+            description="Option description"
             iconName="secured"
             itemPress={doSomething}
           />
 
-          <ProfileItem
+          {/* <ProfileItem
             title="Saved Beneficiary"
             description="Manage your saved account"
             iconName="news"
             itemPress={doSomething}
-          />
+          /> */}
 
           <ProfileItem
             title="Log out"
@@ -105,11 +111,11 @@ const ProfileScreen = () => {
           marginTop="lg"
           padding="md"
           style={styles.container}>
-          <ProfileItem
+          {/* <ProfileItem
             title="Help & Support"
             iconName="secured"
             itemPress={doSomething}
-          />
+          /> */}
 
           <ProfileItem
             title="About Developer"

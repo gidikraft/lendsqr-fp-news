@@ -14,6 +14,7 @@ import { screenTrace } from '@/utils/screentrace';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { RootTabScreenProps } from '@/navigator/types';
 import NewsItemDetails from '@/components/Layouts/NewsItemDetails';
+import { useGetPostsQuery } from '@/services/api/services';
 
 const NewsListingsScreen = ({
   navigation,
@@ -44,8 +45,9 @@ const NewsListingsScreen = ({
       metric.setHttpResponseCode(newsresponse.status);
       // metric.setResponseContentType(newsresponse.headers.get('Content-Type'));
       // metric.setResponsePayloadSize(newsresponse.headers.get('Content-Length'));
-
       await metric.stop();
+      console.log(newsresponse.data, 'newsresponse');
+
       setNewsList(newsresponse.data);
     } catch (error: any) {
       crashlytics().recordError(error);
@@ -55,8 +57,11 @@ const NewsListingsScreen = ({
     }
   };
 
+  const { data, error } = useGetPostsQuery();
+  console.log(data, error, 'postsLoading');
+
   useEffect(() => {
-    getNew();
+    // getNew();
     screenTrace('NewsDetailsScreen');
   }, []);
 
@@ -88,7 +93,7 @@ const NewsListingsScreen = ({
           <ActivityIndicator size="large" color={palette.primary} />
         ) : (
           <FlatList
-            data={newsList}
+            data={data}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.newsItemContainer}
             renderItem={({ item }) => {

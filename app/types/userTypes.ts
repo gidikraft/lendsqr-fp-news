@@ -3,6 +3,7 @@ export type UserDetails = {
   firstname: string;
   lastname: string;
   phonenumber: string;
+  accessToken: string | null;
 };
 
 export type NewsItem = {

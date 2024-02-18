@@ -10,7 +10,7 @@ import remoteConfig from '@react-native-firebase/remote-config';
 import {
   requestUserPermission,
   NoficationListener,
-} from '@/services/notification';
+} from '@/services/notification/notification';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import CodePush from 'react-native-code-push';
 
