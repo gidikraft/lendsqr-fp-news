@@ -8,8 +8,13 @@ import { LogoutModal } from '../../components/Modals/';
 import { screenTrace } from '@/utils/screentrace';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { RootTabScreenProps } from '@/navigator/types';
 
-const ProfileScreen = () => {
+GoogleSignin.configure({
+  webClientId:
+    '466884891109-2hahf5pl97vf7elq283p9cttgntj8a6q.apps.googleusercontent.com',
+});
+const ProfileScreen = ({ navigation }: RootTabScreenProps<'ProfileScreen'>) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
@@ -20,14 +25,17 @@ const ProfileScreen = () => {
 
   const toggleLogoutModal = () => setShowLogoutModal(prev => !prev);
 
-  const loginOutUser = async () => {
+  const logOutUser = async () => {
     await GoogleSignin.signOut().then(() => {
       firebaseAuth.signOut();
       console.log('User signed out!');
     });
   };
 
-  const doSomething = () => console.log('do something');
+  const doSomething = () => {
+    navigation.navigate('AccountSummary');
+    console.log('do something');
+  };
 
   return (
     <Box paddingHorizontal="md" flex={1} backgroundColor="background">
@@ -126,7 +134,7 @@ const ProfileScreen = () => {
       </ScrollView>
       <LogoutModal
         closeModal={toggleLogoutModal}
-        logout={loginOutUser}
+        logout={logOutUser}
         modalVisible={showLogoutModal}
       />
     </Box>

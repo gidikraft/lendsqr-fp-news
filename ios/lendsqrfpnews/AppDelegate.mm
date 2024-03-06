@@ -1,6 +1,9 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import <CodePush/CodePush.h>
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -13,6 +16,9 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   [FIRApp configure];
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

@@ -78,6 +78,10 @@
 		<string>Poppins-Thin.ttf</string>
 		<string>Poppins-ThinItalic.ttf</string>
 	</array>
+  <dict>
+  <key>AppSecret</key>
+  <string>f4e3f66a-6c5b-49ee-9671-c3cc1fa40c11</string>
+  </dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

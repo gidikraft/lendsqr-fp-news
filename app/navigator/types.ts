@@ -18,8 +18,7 @@ export type RootStackParamList = {
   SignupScreen: undefined;
   CreateAccountScreen: undefined;
   NewsDetails: { article: NewsItem } | undefined;
-
-  VerifyOtp: undefined;
+  AccountSummary: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

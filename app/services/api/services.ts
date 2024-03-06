@@ -8,6 +8,9 @@ export const servicesApi = api.injectEndpoints({
       query: () => 'posts',
       providesTags: ['Posts'],
     }),
+    getUsers: builder.query<NewsItem[], void>({
+      query: () => 'users',
+    }),
     addPost: builder.mutation<NewsItem, Omit<NewsItem, 'id'>>({
       query: body => ({
         url: 'post',
@@ -34,5 +37,9 @@ export const servicesApi = api.injectEndpoints({
   overrideExisting: true,
 });
 
-export const { useGetPostsQuery, useAddPostMutation, useEditPostMutation } =
-  servicesApi;
+export const {
+  useGetPostsQuery,
+  useAddPostMutation,
+  useEditPostMutation,
+  useGetUsersQuery,
+} = servicesApi;

@@ -1,11 +1,21 @@
 package com.lendsqrfpnews;
 
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.crashes.Crashes;
+import com.microsoft.appcenter.analytics.Analytics;
 
 public class MainActivity extends ReactActivity {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    // SplashScreen.show(this); // here
+    AppCenter.start(getApplication(), "f4e3f66a-6c5b-49ee-9671-c3cc1fa40c11", Analytics.class, Crashes.class);
+    super.onCreate(null);
+  }
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
